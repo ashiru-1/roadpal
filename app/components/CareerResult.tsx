@@ -181,7 +181,7 @@ export default function CareerResult({ result, onStartOver }: CareerResultProps)
             ].map((tab) => (
               <button
                 key={tab.id}
-                onClick={() => setActiveTab(tab.id as any)}
+                onClick={() => setActiveTab(tab.id as 'overview' | 'roadmap' | 'resources' | 'jobs')}
                 className={`flex items-center gap-2 px-6 py-4 font-medium transition-colors ${
                   activeTab === tab.id
                     ? 'text-purple-600 border-b-2 border-purple-600'

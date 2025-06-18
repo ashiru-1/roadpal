@@ -117,8 +117,8 @@ export default function CareerQuiz({ onComplete, onBack }: CareerQuizProps) {
     });
 
     // Generate strengths and recommendations
-    const strengths = generateStrengths(userAnswers, primaryCareer);
-    const recommendations = generateRecommendations(userAnswers, primaryCareer);
+    const strengths = generateStrengths(userAnswers);
+    const recommendations = generateRecommendations(userAnswers);
 
     return {
       primaryCareer,
@@ -131,7 +131,7 @@ export default function CareerQuiz({ onComplete, onBack }: CareerQuizProps) {
     };
   };
 
-  const generateStrengths = (userAnswers: QuizAnswer[], career: CareerPath): string[] => {
+  const generateStrengths = (userAnswers: QuizAnswer[]): string[] => {
     const strengths: string[] = [];
     
     // Analyze answers to find strengths
@@ -161,7 +161,7 @@ export default function CareerQuiz({ onComplete, onBack }: CareerQuizProps) {
     return strengths.length > 0 ? strengths : ['Adaptable learner', 'Problem-solving mindset'];
   };
 
-  const generateRecommendations = (userAnswers: QuizAnswer[], career: CareerPath): string[] => {
+  const generateRecommendations = (userAnswers: QuizAnswer[]): string[] => {
     const recommendations: string[] = [];
     
     // Check for areas that need improvement
