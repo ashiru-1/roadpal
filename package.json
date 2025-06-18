@@ -15,7 +15,7 @@
     "jspdf": "^2.5.1",
     "html2canvas": "^1.4.1",
     "lucide-react": "^0.263.1",
-    "framer-motion": "^10.16.4",
+    "framer-motion": "^11.0.0",
     "clsx": "^2.0.0",
     "tailwind-merge": "^2.0.0"
   },
