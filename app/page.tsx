@@ -1,103 +1,126 @@
-import Image from "next/image";
+'use client';
 
-export default function Home() {
+import { useState } from 'react';
+import { motion } from 'framer-motion';
+import { 
+  Brain, 
+  Code, 
+  Database, 
+  Shield, 
+  Smartphone, 
+  Globe, 
+  BarChart3, 
+  Palette,
+  ArrowRight
+} from 'lucide-react';
+import CareerQuiz from './components/CareerQuiz';
+import CareerResult from './components/CareerResult';
+import { QuizResult } from './types/career';
+
+export default function TechCareerExplorer() {
+  const [currentStep, setCurrentStep] = useState<'intro' | 'quiz' | 'result'>('intro');
+  const [quizResult, setQuizResult] = useState<QuizResult | null>(null);
+
+  const handleQuizComplete = (result: QuizResult) => {
+    setQuizResult(result);
+    setCurrentStep('result');
+  };
+
+  const handleStartOver = () => {
+    setCurrentStep('intro');
+    setQuizResult(null);
+  };
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+      <div className="container mx-auto px-4 py-8">
+        {currentStep === 'intro' && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-center"
+          >
+            <motion.div
+              initial={{ scale: 0.8 }}
+              animate={{ scale: 1 }}
+              transition={{ delay: 0.2 }}
+              className="mb-8"
+            >
+              <h1 className="text-5xl font-bold text-white mb-4">
+                RoadPal
+              </h1>
+              <p className="text-xl text-gray-300 mb-8">
+                Discover your perfect tech niche through our intelligent career assessment
+              </p>
+            </motion.div>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4 }}
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12"
+            >
+              {[
+                { icon: Brain, title: 'AI/ML Engineer', color: 'from-purple-500 to-pink-500' },
+                { icon: Code, title: 'Full Stack Developer', color: 'from-blue-500 to-cyan-500' },
+                { icon: Database, title: 'Data Engineer', color: 'from-green-500 to-emerald-500' },
+                { icon: Shield, title: 'Cybersecurity Expert', color: 'from-red-500 to-orange-500' },
+                { icon: Smartphone, title: 'Mobile Developer', color: 'from-indigo-500 to-purple-500' },
+                { icon: Globe, title: 'DevOps Engineer', color: 'from-yellow-500 to-orange-500' },
+                { icon: BarChart3, title: 'Data Scientist', color: 'from-teal-500 to-blue-500' },
+                { icon: Palette, title: 'UX/UI Designer', color: 'from-pink-500 to-rose-500' },
+              ].map((career, index) => (
+                <motion.div
+                  key={career.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.1 * index }}
+                  className={`bg-gradient-to-br ${career.color} p-6 rounded-xl text-white text-center hover:scale-105 transition-transform cursor-pointer`}
+                >
+                  <career.icon className="w-12 h-12 mx-auto mb-3" />
+                  <h3 className="font-semibold">{career.title}</h3>
+                </motion.div>
+              ))}
+            </motion.div>
+
+            <motion.button
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6 }}
+              onClick={() => setCurrentStep('quiz')}
+              className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:from-purple-700 hover:to-pink-700 transition-all duration-300 flex items-center gap-2 mx-auto"
+            >
+              Start Your Career Assessment
+              <ArrowRight className="w-5 h-5" />
+            </motion.button>
+
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.8 }}
+              className="mt-12 text-gray-400"
+            >
+              <p className="text-sm">
+                ✓ Personalized career recommendations based on your skills and interests
+              </p>
+              <p className="text-sm">
+                ✓ Detailed roadmaps with learning resources and salary insights
+              </p>
+              <p className="text-sm">
+                ✓ Export your results as PDF or share with others
+              </p>
+            </motion.div>
+          </motion.div>
+        )}
+
+        {currentStep === 'quiz' && (
+          <CareerQuiz onComplete={handleQuizComplete} onBack={() => setCurrentStep('intro')} />
+        )}
+
+        {currentStep === 'result' && quizResult && (
+          <CareerResult result={quizResult} onStartOver={handleStartOver} />
+        )}
+      </div>
     </div>
   );
 }
